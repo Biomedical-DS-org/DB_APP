@@ -1,0 +1,196 @@
+{% extends 'main/header.html' %}
+ {% load widget_tweaks %}
+
+  {% block content %}
+    {% if user.is_authenticated %}
+          <script>  $(document).ready(function(){
+                    $('.sidenav').sidenav();});
+          </script>
+      <style>
+                table {
+            font-family: Cambria, serif;
+            border-collapse: collapse;
+            width:50%;}
+
+              th{font-weight: bold;
+            text-transform: uppercase;
+            font-size: 80%;}
+          tr{font-size: 70%;}
+
+      </style>
+        <a href="/search" style="background-color:purple; color:white" class="waves-effect waves-light btn">New Search</a>
+        <a href="{% url 'main:export' %}?{{ request.GET.urlencode }}" style="background-color:white; color:purple" class="waves-effect waves-light btn">Export to csv</a>
+
+        <br><br>
+        <li>Results: {{count}}</li>
+        <br><br>
+          <table class="centered, highlight"  align="left" size="large" tr*25>
+            <tr>
+              <th>ETR ID</th>
+              <th>Sex</th>
+              <th>Age</th>
+              <th>AMD</th>
+              <th>AMD Comments</th>
+              <th>Haplotype 1</th>
+              <th>Haplotype 2</th>
+              <th>ARMS2</th>
+              <th>HTRA</th>
+              <th>ICB R</th>
+              <th>ICB L</th>
+              <th>LENS R</th>
+              <th>LENS L</th>
+              <th>MAC BM</th>
+              <th>MAC Biopsy</th>
+              <th>NSR R</th>
+              <th>NSR L</th>
+              <th>RET BM R</th>
+              <th>RET BM L</th>
+              <th>RET Biopsy</th>
+              <th>SCLERA R</th>
+              <th>SCLERA L</th>
+              <th>VITREOUS R</th>
+              <th>VITREOUS L</th>
+              <th>OPTIC Nerve</th>
+              <th>DNA Banked</th>
+              <th>ICB Gebotyped</th>
+              <th>Paul Bisop Verified?</th>
+            </tr>
+          {% for med in records %}
+            <tr>
+              <td><a href="{% url 'main:details' pk=med.pk %}"> {{ med.ETR_id}}</a></td>
+              <td> {{ med.SEX}}</td>
+              <td> {{ med.AGE}}</td>
+              <td> {{ med.AMD}}</td>
+              <td> {{ med.AMD_comments}}</td>
+              <td> {{ med.haplotype_1}}</td>
+              <td> {{ med.haplotype_2}}</td>
+              <td> {{ med.ARMS2}}</td>
+              <td> {{ med.HTRA1}}</td>
+              {% if med.ICB_R == 'Yes' %}
+                <td style="color: green; "> {{ med.ICB_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.ICB_R}}</td>
+              {% endif %}
+              {% if med.ICB_L == 'Yes' %}
+                <td style="color: green; "> {{ med.ICB_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.ICB_L}}</td>
+              {% endif %}
+              {% if med.LENS_R == 'Yes' %}
+                <td style="color: green; "> {{ med.LENS_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.LENS_R}}</td>
+              {% endif %}
+              {% if med.LENS_L == 'Yes' %}
+                <td style="color: green; "> {{ med.LENS_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.LENS_L}}</td>
+              {% endif %}
+              {% if med.mac_BM == 'Yes' %}
+                <td style="color: green; "> {{ med.mac_BM}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.mac_BM}}</td>
+              {% endif %}
+              {% if med.mac_biopsy == 'Yes' %}
+                <td style="color: green; "> {{ med.mac_biopsy}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.mac_biopsy}}</td>
+              {% endif %}
+              {% if med.NSR_R == 'Yes' %}
+                <td style="color: green; "> {{ med.NSR_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.NSR_R}}</td>
+              {% endif %}
+              {% if med.NSR_L == 'Yes' %}
+                <td style="color: green; "> {{ med.NSR_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.NSR_L}}</td>
+              {% endif %}
+              {% if med.RET_BM_R == 'Yes' %}
+                <td style="color: green; "> {{ med.RET_BM_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.RET_BM_R}}</td>
+              {% endif %}
+              {% if med.RET_BM_L == 'Yes' %}
+                <td style="color: green; "> {{ med.RET_BM_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.RET_BM_L}}</td>
+              {% endif %}
+              {% if med.ret_biopsy == 'Yes' %}
+                <td style="color: green; "> {{ med.ret_biopsy}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.ret_biopsy}}</td>
+              {% endif %}
+              {% if med.SCLERA_R == 'Yes' %}
+                <td style="color: green; "> {{ med.SCLERA_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.SCLERA_R}}</td>
+              {% endif %}
+              {% if med.SCLERA_L == 'Yes' %}
+                <td style="color: green; "> {{ med.SCLERA_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.SCLERA_L}}</td>
+              {% endif %}
+              {% if med.VITREOUS_R == 'Yes' %}
+                <td style="color: green; "> {{ med.VITREOUS_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.VITREOUS_R}}</td>
+              {% endif %}
+              {% if med.VITREOUS_L == 'Yes' %}
+                <td style="color: green; "> {{ med.VITREOUS_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.VITREOUS_L}}</td>
+              {% endif %}
+              {% if med.optic_nerve == 'Yes' %}
+                <td style="color: green; "> {{ med.optic_nerve}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.optic_nerve}}</td>
+              {% endif %}
+              {% if med.DNA_Banked == 'Yes' %}
+                <td style="color: green; "> {{ med.DNA_Banked}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.DNA_Banked}}</td>
+              {% endif %}
+              {% if med.ICB_Genotyped == 'Yes' %}
+                <td style="color: green; "> {{ med.ICB_Genotyped}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.ICB_Genotyped}}</td>
+              {% endif %}
+              <td> {{ med.Paul_Bisop}}</td>
+            </tr>
+
+          {% endfor %}
+            <div class="pagination">
+              <span class="step-links">
+                {% if records.has_previous %}
+                   <a href="{{ request.get_full_path }}&page=1">&laquo; First</a>
+                   <a href="{{ request.get_full_path }}&page={{ records.previous_page_number }}">Previous</a>
+                {% endif %}
+
+              <span class="current">
+                Page {{ records.number }} of {{ records.paginator.num_pages }}
+              </span>
+
+            {% if records.has_next %}
+              <a href="{{ request.get_full_path }}&page={{ records.next_page_number }}">Next</a>
+              <a href="{{ request.get_full_path }}&page={{ records.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+              </span>
+            </div>
+          </table>
+    {% else %}
+      <div class="column">
+            <div class="col s12 m6 l4">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title" >You need to be logged in to view</span>
+                  <li><a href="/login">Login</a></li>
+                  <p style="font-size: 70%">If you do not have a valid username and password, please contact <a href="mailto:Simon.Clark-3@manchester.ac.uk">Dr. Simon Clark</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    {% endif %}
+
+   {% endblock %}

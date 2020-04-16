@@ -1,0 +1,32 @@
+<nav class="nav-wrapper">
+  <!-- <div class="nav-wrapper"> -->
+    <a href="/login" class="brand-logo center">TEST_CLASIFIED DATABASE</a>
+    <a href="https://www.manchester.ac.uk" class="brand-logo right"><img src="http://assets.manchester.ac.uk/logos/lo-res/UniLogoTable_colourbackgrounds.png" width="100" height="-350"></a>
+    <ul id="nav-mobile" class="left">
+      <li><a href="/records">Records</a></li>
+      <li><a class="dropdown-button" data-activates="search_dropdown">Search</a></li>
+      <li><a href="/admin">Admin Login</a></li>
+
+      {% if user.is_authenticated %}
+          <li><a class="dropdown-button" data-activates="user_dropdown">{{user.username}}</a></li>
+
+          <ul class="dropdown-content" id="search_dropdown">
+            <li><a style="font-size: 90%" href="/search">Universal Search</a></li>
+            <li><a style="font-size: 90%" href="/fake_search">By ID</a></li>
+          </ul>
+
+          <ul class="dropdown-content" id="user_dropdown">
+            <li><a href="/change_password">Change Password</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          <script>  $('.dropdown-trigger').dropdown({});</script>
+          <script>  $(document).ready(function(){
+    $('.tap-target').tapTarget();
+  });
+         </script>
+
+      {% else %}
+      {% endif %}
+    </ul>
+  <!-- </div> -->
+</nav>

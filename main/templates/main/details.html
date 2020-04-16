@@ -1,0 +1,416 @@
+{% extends 'main/header.html' %}
+ {% load widget_tweaks %}
+ {% block content %}
+  {% if user.is_authenticated %}
+   <style type="text/css">
+     .fancy {
+    position: relative;
+    background-color: #FFC;
+    padding: 2rem;
+    text-align: center;
+    max-width: 100px;
+  }
+  .ul {
+      list-style-type:none;
+  }
+  li span {
+      display:inline-block;
+      width:100px;
+  }
+
+  /*.fancy::before {
+    content: "";
+
+    position : absolute;
+    z-index  : -1;
+    bottom   : 15px;
+    right    : 5px;
+    width    : 50%;
+    top      : 80%;
+    max-width: 200px;
+
+    box-shadow: 0px 13px 10px black;
+    transform: rotate(4deg);*/
+  }
+   </style>
+
+   {% for med in post %}
+   <div class="container">
+    <div class="contact-form medium-padding120">
+     <form class="contact-form" method="get" action="/filtered_details/">
+      <header style="color: purple" align="middle"><font size="6"><b>{{med.ETR_id}}</b></font></header>
+    </div>
+  {% endfor %}
+    {% csrf_token %}
+      <div class="row">
+        <div class="input-field col s12 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <input id="ETRID" name="ETRID" type="text" class="validate">
+          <label for="ETRID">Search New ETR ID</label>
+        </div>
+         <div class="row">
+            <div class="submit-block table">
+              <div class="col-lg-3 table-cell">
+                <button class="btn btn-small btn-primary">
+                  <span class="text">Search</span>
+
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      </div>
+
+    {% for med in post %}
+      <h5><u>General</u></h5>
+      <table>
+          <thead>
+            <tr>
+                <th style="color:#7986cb;">Sex</th>
+                <th style="color:#7986cb;">Age</th>
+                <th style="color:#7986cb;">Date Processed</th>
+                <th style="color:#7986cb;">Image File</th>
+                <th style="color:#7986cb;">PM Time (Hrs)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{med.SEX}}</td>
+              <td>{{med.AGE}}</td>
+              <td type="date">{{med.date_processed | date:"d F Y"}}</td>
+              <td>{{med.image_file}}</td>
+              <td>{{med.pm_time}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#7986cb;">AMD</th>
+                <th style="color:#7986cb;">AMD Comments</th>
+                <th style="color:#7986cb;">Cause of Death</th>
+                <th style="color:#7986cb;">COD Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{med.AMD}}</td>
+              <td>{{med.AMD_comments}}</td>
+              <td>{{med.COD}}</td>
+              <td>{{med.COD_comments}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#7986cb;">Smoking</th>
+                <th style="color:#7986cb;">Smoking Comments</th>
+                <th style="color:#7986cb;">Diabetes</th>
+                <th style="color:#7986cb;">Diabetes Comments</th>
+                <th style="color:#7986cb;">Other Ocular</th>
+                <th style="color:#7986cb;">Other Ocular Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{med.smoking}}</td>
+              <td>{{med.smoking_comments}}</td>
+              <td>{{med.diabetes}}</td>
+              <td>{{med.diabetes_comments}}</td>
+              <td>{{med.ocular_disease}}</td>
+              <td>{{med.ocular_disease_comments}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#7986cb;">Medication</th>
+                <th style="color:#7986cb;">Ethnicity</th>
+                <th style="color:#7986cb;">Additional Notes</th>
+                <th style="color:#7986cb;">Comments</th>
+                <th style="color:#7986cb;">Other</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{med.medication}}</td>
+              <td>{{med.ethnicity}}</td>
+              <td>{{med.additional_notes}}</td>
+              <td>{{med.comments}}</td>
+              <td>{{med.other}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#7986cb;">Paul Bisop Verified</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{med.Paul_Bisop}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <h5><u>Genotypes</u></h5>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#ef6c00;">ARMS2</th>
+                <th style="color:#ef6c00;">HTRA1</th>
+                <th style="color:#ef6c00;">Risk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{med.ARMS2}}</td>
+              <td>{{med.HTRA1}}</td>
+              <td>{{med.Risk}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <h5><u>Haplotypes</u></h5>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#2e7d32;">Haplotype 1</th>
+                <th style="color:#2e7d32;">Haplotype 2</th>
+                <th style="color:#2e7d32;">Probability</th>
+                <th style="color:#2e7d32;">Likelihood</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{med.haplotype_1}}</td>
+              <td>{{med.haplotype_2}}</td>
+              <td>{{med.probability}}</td>
+              <td>{{med.Most_likely_haplotype}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <h5><u>Tissues</u></h5>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#78909c;">ICB Right</th>
+                <th style="color:#78909c;">ICB Left</th>
+                <th style="color:#78909c;">LENS Right</th>
+                <th style="color:#78909c;">LENS Left</th>
+                <th style="color:#78909c;">NSR Right</th>
+                <th style="color:#78909c;">NSR Left</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% if med.ICB_R == 'Yes' %}
+                  <td style="color: green; "> {{ med.ICB_R}}</td>
+                {% else %}
+                  <td style="color: red; "> {{ med.ICB_R}}</td>
+                {% endif %}
+                {% if med.ICB_L == 'Yes' %}
+                  <td style="color: green; "> {{ med.ICB_L}}</td>
+                {% else %}
+                  <td style="color: red; "> {{ med.ICB_L}}</td>
+                {% endif %}
+                {% if med.LENS_R == 'Yes' %}
+                  <td style="color: green; "> {{ med.LENS_R}}</td>
+                {% else %}
+                  <td style="color: red; "> {{ med.LENS_R}}</td>
+                {% endif %}
+                {% if med.LENS_L == 'Yes' %}
+                  <td style="color: green; "> {{ med.LENS_L}}</td>
+                {% else %}
+                  <td style="color: red; "> {{ med.LENS_L}}</td>
+                {% endif %}
+                {% if med.NSR_R == 'Yes' %}
+                  <td style="color: green; "> {{ med.NSR_R}}</td>
+                {% else %}
+                  <td style="color: red; "> {{ med.NSR_R}}</td>
+                {% endif %}
+                {% if med.NSR_L == 'Yes' %}
+                  <td style="color: green; "> {{ med.NSR_L}}</td>
+                {% else %}
+                  <td style="color: red; "> {{ med.NSR_L}}</td>
+                {% endif %}
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#78909c;">MAC BM</th>
+                <th style="color:#78909c;">MAC Biopsy</th>
+                <th style="color:#78909c;">RET BM Right</th>
+                <th style="color:#78909c;">RET BM Left</th>
+                <th style="color:#78909c;">RET Biopsy</th>
+                <th style="color:#78909c;">Optic Nerve</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% if med.mac_BM == 'Yes' %}
+                <td style="color: green; "> {{ med.mac_BM}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.mac_BM}}</td>
+              {% endif %}
+              {% if med.mac_biopsy == 'Yes' %}
+                <td style="color: green; "> {{ med.mac_biopsy}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.mac_biopsy}}</td>
+              {% endif %}
+              {% if med.RET_BM_R == 'Yes' %}
+                <td style="color: green; "> {{ med.RET_BM_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.RET_BM_R}}</td>
+              {% endif %}
+              {% if med.RET_BM_L == 'Yes' %}
+                <td style="color: green; "> {{ med.RET_BM_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.RET_BM_L}}</td>
+              {% endif %}
+              {% if med.ret_biopsy == 'Yes' %}
+                <td style="color: green; "> {{ med.ret_biopsy}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.ret_biopsy}}</td>
+              {% endif %}
+              {% if med.optic_nerve == 'Yes' %}
+                <td style="color: green; "> {{ med.optic_nerve}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.optic_nerve}}</td>
+              {% endif %}
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#78909c;">SCLERA Right</th>
+                <th style="color:#78909c;">SCLERA Left</th>
+                <th style="color:#78909c;">VITREOUS Right</th>
+                <th style="color:#78909c;">VITREOUS Left</th>
+                <th style="color:#78909c;">DNA Banked</th>
+                <th style="color:#78909c;">ICB Genotyped</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% if med.SCLERA_R == 'Yes' %}
+                <td style="color: green; "> {{ med.SCLERA_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.SCLERA_R}}</td>
+              {% endif %}
+              {% if med.SCLERA_L == 'Yes' %}
+                <td style="color: green; "> {{ med.SCLERA_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.SCLERA_L}}</td>
+              {% endif %}
+              {% if med.VITREOUS_R == 'Yes' %}
+                <td style="color: green; "> {{ med.VITREOUS_R}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.VITREOUS_R}}</td>
+              {% endif %}
+              {% if med.VITREOUS_L == 'Yes' %}
+                <td style="color: green; "> {{ med.VITREOUS_L}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.VITREOUS_L}}</td>
+              {% endif %}
+              {% if med.DNA_Banked == 'Yes' %}
+                <td style="color: green; "> {{ med.DNA_Banked}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.DNA_Banked}}</td>
+              {% endif %}
+              {% if med.ICB_Genotyped == 'Yes' %}
+                <td style="color: green; "> {{ med.ICB_Genotyped}}</td>
+              {% else %}
+                <td style="color: red; "> {{ med.ICB_Genotyped}}</td>
+              {% endif %}
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+                <th style="color:#880e4f;">Macular Biopsy</th>
+                <th style="color:#880e4f;">Location</th>
+                <th style="color:#880e4f;">Macular Slides</th>
+                <th style="color:#880e4f;">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-size: 12px;">{{med.Macular_Biopsy}}</td>
+              <td style="font-size: 12px;">{{med.Macular_Biopsy_Location}}</td>
+              <td style="font-size: 12px;">{{med.Macular_Slides}}</td>
+              <td style="font-size: 12px;">{{med.Macular_Slides_Location}}</td>
+            </tr>
+          </tbody>
+          <table>
+          <thead>
+            <tr>
+                <th style="color:#880e4f;">Retinal Biopsy</th>
+                <th style="color:#880e4f;">Location</th>
+                <th style="color:#880e4f;">Retinal Slides</th>
+                <th style="color:#880e4f;">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-size: 12px;">{{med.Retinal_Biopsy}}</td>
+              <td style="font-size: 12px;">{{med.Retinal_Biopsy_Location}}</td>
+              <td style="font-size: 12px;">{{med.Retinal_Slides}}</td>
+              <td style="font-size: 12px;">{{med.Retinal_Slides_Location}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <h5><u>RNA Seq</u></h5>
+        <table>
+          <thead>
+            <tr>
+              <th style="color:#7986cb;">RNA Seq</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-size: 12px;">{{med.RNA_Seq}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <a href="/admin/main/record/{{med.ETR_id}}/change/" style="background-color:orange; color:blue" class="waves-effect waves-light btn" align="center">Edit Record</a>
+
+    <!-- <div class="fancy">Hi! I want to be fancy.</div> -->
+  {% endfor %}
+{% else %}
+    <div class="column">
+          <div class="col s12 m6 l4">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title" >You need to be logged in to view</span>
+                <li><a href="/login">Login</a></li>
+                <p style="font-size: 70%">If you do not have a valid username and password, please contact <a href="mailto:Simon.Clark-3@manchester.ac.uk">Dr. Simon Clark</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  {% endif %}
+ {% endblock %}
+

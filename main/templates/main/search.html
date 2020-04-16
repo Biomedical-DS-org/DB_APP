@@ -1,0 +1,158 @@
+{% extends 'main/header.html' %}
+   {% block content %}
+    {% if user.is_authenticated %}
+    <script>
+        $('#textarea1').val('New Text');
+        M.textareaAutoResize($('#textarea1'));
+    </script>
+    <style>
+      h1{font-size: 100%} p{font-size: 40%} input{font-size: 20%}
+      header{font-size: 200%}
+    </style>
+      <div class="container">
+        <div class="contact-form medium-padding120">
+          <form class="contact-form" method="get" action="/filtered_records/">
+            <header align="middle">Search Records</header>
+            {% csrf_token %}
+            <div class="row">
+              <div class="input-field col s6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input id="ETRID" name="ETRID" type="text" class="validate">
+                <label for="ETRID">ETR ID</label>
+              </div>
+              <div class="input-field col s3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input id="MIN" name="MIN" type="number" class="validate">
+                <label for="MIN">Minimum Age</label>
+              </div>
+              <div class="input-field col s3 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input id="MAX" name="MAX" type="number" class="validate">
+                <label for="MAX">Maximum Age</label>
+              </div>
+              <div class="col s3 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <h1>SEX</h1>
+                <p><label><input type="radio" name="SEX" class="checked" value="F"> <span>Female</span></label></p>
+                <p><label><input type="radio" name="SEX" class="checked" value="M"> <span>Male</span></label></p>
+                <p><label><input type="radio" name="SEX" class="checked" value="NI"> <span>No Info</span></label></p>
+
+              </div>
+              <div class="col s3 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <h1>Smoking</h1>
+                <p><label><input type="radio" name="smoking" class="checked" value="Yes"> <span>Yes</span></label></p>
+                <p><label><input type="radio" name="smoking" class="checked" value="No"> <span>No</span></label></p>
+                <p><label><input type="radio" name="smoking" class="checked" value="No Information"> <span>No Info</span></label></p>
+              </div>
+              <div class="col s3 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <h1>Diabetes</h1>
+                <p><label><input type="radio" name="Diabetes" class="checked" value="Yes"> <span>Yes</span></label></p>
+                <p><label><input type="radio" name="Diabetes" class="checked" value="No"> <span>No</span></label></p>
+                <p><label><input type="radio" name="Diabetes" class="checked" value="No Information"> <span>No Info</span></label></p>
+              </div>
+              <div class="col s3 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <h1>Ocular Disease</h1>
+                <p><label><input type="radio" name="OCULAR" class="checked" value="Yes"> <span>Yes</span></label></p>
+                <p><label><input type="radio" name="OCULAR" class="checked" value="No"> <span>No</span></label></p>
+                <p><label><input type="radio" name="OCULAR" class="checked" value="No Information"> <span>No Info</span></label></p>
+              </div>
+              <div class="input-field col s6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input id="HAPLO1" name="HAPLO1" type="text" class="validate">
+                <label for="HAPLO1">Haplotype 1</label>
+                <span class="helper-text" data-error="wrong" data-success="right">Format Eg. H1a--</span>
+              </div>
+              <div class="input-field col s6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input id="HAPLO2" name="HAPLO2" type="text" class="validate">
+                <label for="HAPLO2">Haplotype 2</label>
+                <span class="helper-text" data-error="wrong" data-success="right">Format Eg. H3--</span>
+              </div>
+              <div class="input-field col s6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input id="ARMS2" name="ARMS2" type="text" class="validate">
+                <label for="ARMS2">ARMS2</label>
+                <span class="helper-text" data-error="wrong" data-success="right">GG or GT or TT</span>
+              </div>
+              <div class="input-field col s6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <input id="HTRA1" name="HTRA1" type="text" class="validate">
+                <label for="HTRA1">HTRA1</label>
+                <span class="helper-text" data-error="wrong" data-success="right">GG or AG or AA</span>
+              </div>
+              <div class="col s6 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <h1>Tissues</h1>
+                  <p><label><input type="checkbox" name="ICBR" class="checked" value="Yes"> <span>ICB Right</span></label>
+                  <label><input type="checkbox" name="ICBL" class="checked" value="Yes"> <span>ICB Left</span></label></p>
+                  <p><label><input type="checkbox" name="LENSR" class="checked" value="Yes"> <span>LENS Right</span></label>
+                    <label><input type="checkbox" name="LENSL" class="checked" value="Yes"> <span>LENS Left</span></label></p>
+                  <p><label><input type="checkbox" name="RETBMR" class="checked" value="Yes"> <span>RET BM Right</span></label>
+                  <label><input type="checkbox" name="RETBML" class="checked" value="Yes"> <span>RET BM Left</span></label></p>
+                  <p><label><input type="checkbox" name="RETBIO" class="checked" value="Yes"> <span>RET Biopsy</span></label></p>
+                  <p><label><input type="checkbox" name="SCLERAR" class="checked" value="Yes"> <span>Sclera Right</span></label>
+                    <label><input type="checkbox" name="SCLERAL" class="checked" value="Yes"> <span>Sclera Left</span></label></p>
+              </div>
+              <div class="col s6 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  <h1>Tissues</h1>
+                  <p><label><input type="checkbox" name="MACBM" class="checked" value="Yes"> <span>MAC BM</span></label>
+                  <label><input type="checkbox" name="MACBIO" class="checked" value="Yes"> <span>MAC Biopsy</span></label></p>
+                  <p><label><input type="checkbox" name="NSRR" class="checked" value="Yes"> <span>NSR Right</span></label>
+                    <label><input type="checkbox" name="NSSL" class="checked" value="Yes"> <span>NSR Left</span></label></p>
+                  <p><label><input type="checkbox" name="VITREOUSR" class="checked" value="Yes"> <span>Vitreous Right</span></label>
+                  <label><input type="checkbox" name="VITREOUSL" class="checked" value="Yes"> <span>Vitreous Left</span></label></p>
+                  <p><label><input type="checkbox" name="OPTICNERVE" class="checked" value="Yes"> <span>Optic Nerve</span></label>
+                    <label><input type="checkbox" name="DNABANKED" class="checked" value="Yes"> <span>DNA Banked</span></label></p>
+                  <p><label><input type="checkbox" name="ICB_GEN" class="checked" value="Yes"> <span>ICB Genotyped</span></label></p>
+              </div>
+              <!-- <div class="input-field col s12 col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                    <textarea id="tissue" name="tissue" type="text" class="materialize-textarea"></textarea>
+                      <label for="tissue">Retinal/Macular Tissue</label>
+                  </div> -->
+              <div class="col s3 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                <h1>AMD</h1>
+                <p><label><input type="radio" name="AMD" class="checked" value="No"> <span>No</span></label></p>
+                <p><label><input type="radio" name="AMD" class="checked" value="Unknown"> <span>Unknown</span></label></p>
+                <p><label><input type="radio" name="AMD" class="checked" value="Early"> <span>Early</span></label></p>
+                <p><label><input type="radio" name="AMD" class="checked" value="Borderline"> <span>Borderline</span></label></p>
+                <p><label><input type="radio" name="AMD" class="checked" value="Late"> <span>Late</span></label></p>
+                <p><label><input type="radio" name="AMD" class="checked" value="Wet"> <span>Wet</span></label></p>
+                <p><label><input type="radio" name="AMD" class="checked" value="Not Clincial"> <span>Not Clincial</span></label></p>
+                <p><label><input type="radio" name="AMD" class="checked" value="Non Control"> <span>Non Control</span></label></p>
+              </div>
+            </div>
+              </div>
+              <div class="input-field col s3 col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                <textarea id="MEDICATION" name="MEDICATION" type="text" class="materialize-textarea"></textarea>
+                <label for="MEDICATION">Medication</label>
+              </div>
+              <div class="input-field col s3 col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                <textarea id="RNA_Seq" name="RNA_Seq" type="text" class="materialize-textarea"></textarea>
+                <label for="RNA_Seq">RNA Sequence Search</label>
+              </div>
+            </div>
+
+            </div>
+            <div class="row">
+              <div class="submit-block table" align="center">
+                <div class="col-lg-3 table-cell">
+                  <button class="btn btn-small btn-primary">
+                    <span class="text">Search</span>
+
+                  </button>
+
+
+                </div>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    {% else %}
+      <div class="column">
+            <div class="col s12 m6 l4">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title" >You need to be logged in to view</span>
+                  <li><a href="/login">Login</a></li>
+                  <p style="font-size: 70%">If you do not have a valid username and password, please contact <a href="mailto:Simon.Clark-3@manchester.ac.uk">Dr. Simon Clark</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    {% endif %}
+   {% endblock %}

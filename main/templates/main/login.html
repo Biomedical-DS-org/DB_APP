@@ -1,0 +1,31 @@
+{% extends "main/header.html" %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="column">
+          <div class="col s12 m6 l4">
+            <div class="card hoverable" style="color:black">
+              <div class="card-content">
+                <span class="card-title" >Clasified Database</span>
+                <p style="font-size: 90%">You are logged in as {{user.username}}.</p>
+                <li><a href="/logout">Logout</a></li>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% else %}
+      <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn" style="background-color:purple; color:white" type="submit">login</button>
+        <a class="btn" style="background-color:white; color:purple" href="/reset_password">Forgot Password</a>
+
+       </form>
+       <!-- <a class="btn" style="background-color:purple; color:white" href="/reset_password">Forgot Password</a> -->
+
+
+       If you do not already have an account, please email your Candidate, <a href="mailto:d.solomos@yahoo.co.uk">Dimitrios Solomos</a>.
+      {% endif %}
+{% endblock %}
+
+
